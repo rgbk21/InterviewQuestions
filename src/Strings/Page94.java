@@ -263,6 +263,40 @@ class page108{
     }
 }
 
+
+
+
+
+class AddWithoutPlusOperator{
+
+    public int calculateSum(int x, int y){
+
+        int sum = 0;
+        int carry = 0;
+
+        do {
+            sum = x ^ y;
+            carry = (x & y) << 1;
+            x = sum;
+            y = carry;
+        } while(carry != 0);
+
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        AddWithoutPlusOperator mySolution = new AddWithoutPlusOperator();
+        System.out.println(mySolution.calculateSum(5,5));
+    }
+}
+
+
+
+
+
+
+
+
 class CommonCode{
 
     //writeToAFile will create a file with name "filename.csv" and write "something" to it
@@ -281,14 +315,15 @@ class CommonCode{
 
         try(BufferedReader br = new BufferedReader(new FileReader("filename.txt"))) {
             StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
+            String line = br.readLine();//Read the first line separately
+            //Do stuff with the first line here
+            System.out.println("First Line: " + line);
 
-            while (line != null) {
+            //Then start reading from the next line and keep reading till you are done
+            while ((line = br.readLine()) != null) {
                 //Do your thing here
-                System.out.println(line);
                 sb.append(line);//StringBuilder appends everything to the String. And remembers it.
-                sb.append(System.lineSeparator());
-                line = br.readLine();
+                sb.append(System.lineSeparator());//Add the system specific line separator
             }
             String everything = sb.toString();//everything is going to store the entire text as a String
         } catch (IOException e) {
@@ -309,7 +344,8 @@ class CommonCode{
 
         CommonCode mySolution = new CommonCode();
 //        mySolution.writeToAFile();
-//        mySolution.readFromAFile();
+        mySolution.readFromAFile();
+
         Hashtable<String, Integer> myHashTable = new Hashtable<>();
         for(int i = 0; i < 26; i++){
             String next = Character.toString((char)('A' + i));
@@ -318,4 +354,5 @@ class CommonCode{
         mySolution.extractingElementsFromHashTable(myHashTable);
     }
 }
+
 
